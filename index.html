@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Naseem Sareef Foundation | Empowering Through Education & Compassion</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'islamic-green': '#1a5f4a',
+                        'islamic-gold': '#d4af37',
+                        'islamic-cream': '#f5f1e8',
+                        'deep-teal': '#0f3d3e',
+                        'warm-sand': '#e6d5b8'
+                    },
+                    fontFamily: {
+                        'amiri': ['Amiri', 'serif'],
+                        'inter': ['Inter', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        * {
+            scroll-behavior: smooth;
+        }
+        
+        .geometric-pattern {
+            background-image: 
+                radial-gradient(circle at 20% 50%, rgba(212, 175, 55, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(26, 95, 74, 0.1) 0%, transparent 50%);
+        }
+        
+        .islamic-border {
+            position: relative;
+        }
+        
+        .islamic-border::before,
+        .islamic-border::after {
+            content: '❋';
+            position: absolute;
+            color: #d4af37;
+            font-size: 1.5rem;
+        }
+        
+        .islamic-border::before {
+            left: -2rem;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        
+        .islamic-border::after {
+            right: -2rem;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        
+        .card-hover {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 50px -12px rgba(26, 95, 74, 0.25);
+        }
+        
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+        
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .counter {
+            background: linear-gradient(135deg, #1a5f4a 0%, #0f3d3e 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .donate-btn {
+            background: linear-gradient(135deg, #d4af37 0%, #b8960c 100%);
+            transition: all 0.3s ease;
+        }
+        
+        .donate-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.4);
+        }
+        
+        .nav-blur {
+            backdrop-filter: blur(12px);
+            background: rgba(255, 255, 255, 0.9);
+        }
+        
+        .arabic-calligraphy {
+            font-family: 'Amiri', serif;
+            letter-spacing: 0.1em;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 0 20px rgba(212, 175, 55, 0.3); }
+            50% { box-shadow: 0 0 40px rgba(212, 175, 55, 0.6); }
+        }
+        
+        .glow-effect {
+            animation: pulse-glow 3s infinite;
+        }
+    </style>
+</head>
+<body class="font-inter bg-islamic-cream text-gray-800 overflow-x-hidden">
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 nav-blur border-b border-islamic-gold/20 transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex items-center space-x-3">
+                    <div class="w-12 h-12 bg-islamic-green rounded-full flex items-center justify-center text-white font-amiri text-2xl font-bold border-2 border-islamic-gold">
+                        ن
+                    </div>
+                    <div>
+                        <h1 class="text-xl font-bold text-islamic-green font-amiri">NASEEM SAREEF</h1>
+                        <p class="text-xs text-islamic-gold tracking-wider">FOUNDATION</p>
+                    </div>
+                </div>
+                
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#home" class="text-gray-700 hover:text-islamic-green font-medium transition-colors">Home</a>
+                    <a href="#mission" class="text-gray-700 hover:text-islamic-green font-medium transition-colors">Our Mission</a>
+                    <a href="#programs" class="text-gray-700 hover:text-islamic-green font-medium transition-colors">Programs</a>
+                    <a href="#impact" class="text-gray-700 hover:text-islamic-green font-medium transition-colors">Impact</a>
+                    <a href="#contact" class="text-gray-700 hover:text-islamic-green font-medium transition-colors">Contact</a>
+                    <button onclick="openDonateModal()" class="donate-btn px-6 py-2 rounded-full text-white font-bold shadow-lg">
+                        Donate Now
+                    </button>
+                </div>
+                
+                <button class="md:hidden text-islamic-green text-2xl" onclick="toggleMobileMenu()">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobileMenu" class="hidden md:hidden bg-white border-t border-gray-100">
+            <div class="px-4 pt-2 pb-6 space-y-2">
+                <a href="#home" class="block px-3 py-2 text-gray-700 hover:bg-islamic-cream rounded-md">Home</a>
+                <a href="#mission" class="block px-3 py-2 text-gray-700 hover:bg-islamic-cream rounded-md">Our Mission</a>
+                <a href="#programs" class="block px-3 py-2 text-gray-700 hover:bg-islamic-cream rounded-md">Programs</a>
+                <a href="#impact" class="block px-3 py-2 text-gray-700 hover:bg-islamic-cream rounded-md">Impact</a>
+                <button onclick="openDonateModal()" class="w-full mt-4 donate-btn px-6 py-3 rounded-full text-white font-bold">
+                    Donate Now
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative min-h-screen flex items-center justify-center geometric-pattern pt-20 overflow-hidden">
+        <div class="absolute inset-0 opacity-10">
+            <div class="absolute top-20 left-10 w-64 h-64 border-2 border-islamic-gold rounded-full"></div>
+            <div class="absolute bottom-20 right-10 w-96 h-96 border border-islamic-green rounded-full"></div>
+            <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] border border-islamic-gold/30 rounded-full"></div>
+        </div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 grid md:grid-cols-2 gap-12 items-center">
+            <div class="text-center md:text-left space-y-6 reveal active">
+                <div class="inline-block px-4 py-1 bg-islamic-green/10 text-islamic-green rounded-full text-sm font-semibold tracking-wide mb-4 border border-islamic-green/20">
+                    <i class="fas fa-moon mr-2"></i> Serving Humanity Since 2010
+                </div>
+                <h1 class="text-5xl md:text-7xl font-bold text-islamic-green font-amiri leading-tight">
+                    Illuminating Hearts Through <span class="text-islamic-gold">Knowledge</span> & <span class="text-islamic-gold">Compassion</span>
+                </h1>
+                <p class="text-xl text-gray-600 leading-relaxed max-w-lg">
+                    Providing free Islamic education to students and nutritious meals to the needy. Join us in spreading light and hope across communities.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start pt-4">
+                    <button onclick="openDonateModal()" class="donate-btn px-8 py-4 rounded-full text-white font-bold text-lg shadow-xl glow-effect flex items-center justify-center gap-2">
+                        <i class="fas fa-heart"></i> Support Our Cause
+                    </button>
+                    <a href="#programs" class="px-8 py-4 rounded-full border-2 border-islamic-green text-islamic-green font-bold text-lg hover:bg-islamic-green hover:text-white transition-all flex items-center justify-center gap-2">
+                        <i class="fas fa-play-circle"></i> Our Programs
+                    </a>
+                </div>
+                
+                <div class="flex items-center gap-8 pt-8 justify-center md:justify-start text-gray-500">
+                    <div class="flex items-center gap-2">
+                        <i class="fas fa-check-circle text-islamic-green"></i>
+                        <span class="text-sm">Registered Charity</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <i class="fas fa-check-circle text-islamic-green"></i>
+                        <span class="text-sm">Tax Exempt</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <i class="fas fa-check-circle text-islamic-green"></i>
+                        <span class="text-sm">Transparent</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="relative floating reveal active">
+                <div class="relative rounded-3xl overflow-hidden shadow-2xl border-4 border-white">
+                    <img src="https://images.unsplash.com/photo-1544027993-37dbfe43562a?w=800&h=600&fit=crop" alt="Students learning" class="w-full h-auto object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-islamic-green/80 to-transparent"></div>
+                    <div class="absolute bottom-0 left-0 right-0 p-8 text-white">
+                        <p class="font-amiri text-2xl mb-2">"The best among you are those who learn the Quran and teach it"</p>
+                        <p class="text-sm opacity-90">- Prophet Muhammad (PBUH)</p>
+                    </div>
+                </div>
+                <div class="absolute -bottom-6 -left-6 bg-white p-4 rounded-2xl shadow-xl border border-islamic-gold/20">
+                    <div class="flex items-center gap-3">
+                        <div class="w-12 h-12 bg-islamic-green rounded-full flex items-center justify-center text-white">
+                            <i class="fas fa-utensils"></i>
+                        </div>
+                        <div>
+                            <p class="text-2xl font-bold text-islamic-green">50,000+</p>
+                            <p class="text-xs text-gray-500">Meals Served Monthly</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
+            <a href="#mission" class="text-islamic-green text-2xl">
+                <i class="fas fa-chevron-down"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- Mission Section -->
+    <section id="mission" class="py-24 bg-white relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 reveal">
+                <div class="islamic-border inline-block px-8 py-2 mb-4">
+                    <span class="text-islamic-gold font-amiri text-lg tracking-widest">OUR PURPOSE</span>
+                </div>
+                <h2 class="text-4xl md:text-5xl font-bold text-islamic-green font-amiri mb-6">Guided by Faith, Driven by Service</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+                    The Naseem Sareef Foundation stands as a beacon of hope, fulfilling our Islamic duty to seek knowledge and feed the hungry. We believe education is the key to empowerment and food is the right of every human being.
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-islamic-cream rounded-3xl p-8 card-hover reveal border border-islamic-gold/10 relative overflow-hidden group">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-islamic-green/5 rounded-full -mr-16 -mt-16 transition-transform group-hover:scale-150"></div>
+                    <div class="w-16 h-16 bg-islamic-green rounded-2xl flex items-center justify-center text-white text-2xl mb-6 shadow-lg">
+                        <i class="fas fa-book-open"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-islamic-green mb-4 font-amiri">Islamic Education</h3>
+                    <p class="text-gray-600 leading-relaxed mb-6">
+                        Free Quranic studies, Islamic sciences, and character development programs for students of all ages, taught by qualified scholars.
+                    </p>
+                    <div class="flex items-center text-islamic-gold font-semibold">
+                        <span>Learn More</span>
+                        <i class="fas fa-arrow-right ml-2 transform group-hover:translate-x-2 transition-transform"></i>
+                    </div>
+                </div>
+                
+                <div class="bg-islamic-cream rounded-3xl p-8 card-hover reveal border border-islamic-gold/10 relative overflow-hidden group" style="transition-delay: 100ms;">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-islamic-gold/10 rounded-full -mr-16 -mt-16 transition-transform group-hover:scale-150"></div>
+                    <div class="w-16 h-16 bg-islamic-gold rounded-2xl flex items-center justify-center text-white text-2xl mb-6 shadow-lg">
+                        <i class="fas fa-hand-holding-heart"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-islamic-green mb-4 font-amiri">Food Distribution</h3>
+                    <p class="text-gray-600 leading-relaxed mb-6">
+                        Daily meals, Ramadan iftars, and emergency food relief to the needy, ensuring no one in our community goes hungry.
+                    </p>
+                    <div class="flex items-center text-islamic-gold font-semibold">
+                        <span>Learn More</span>
+                        <i class="fas fa-arrow-right ml-2 transform group-hover:translate-x-2 transition-transform"></i>
+                    </div>
+                </div>
+                
+                <div class="bg-islamic-cream rounded-3xl p-8 card-hover reveal border border-islamic-gold/10 relative overflow-hidden group" style="transition-delay: 200ms;">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-islamic-green/5 rounded-full -mr-16 -mt-16 transition-transform group-hover:scale-150"></div>
+                    <div class="w-16 h-16 bg-islamic-green rounded-2xl flex items-center justify-center text-white text-2xl mb-6 shadow-lg">
+                        <i class="fas fa-hands-helping"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-islamic-green mb-4 font-amiri">Community Support</h3>
+                    <p class="text-gray-600 leading-relaxed mb-6">
+                        Orphan sponsorship, elderly care, and disaster relief efforts to strengthen the bonds of brotherhood and sisterhood.
+                    </p>
+                    <div class="flex items-center text-islamic-gold font-semibold">
+                        <span>Learn More</span>
+                        <i class="fas fa-arrow-right ml-2 transform group-hover:translate-x-2 transition-transform"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Impact Stats -->
+    <section class="py-20 bg-islamic-green relative overflow-hidden">
+        <div class="absolute inset-0 opacity-10">
+            <div class="absolute inset-0" style="background-image: repeating-linear-gradient(45deg, transparent, transparent 35px, rgba(255,255,255,.1) 35px, rgba(255,255,255,.1) 70px);"></div>
+        </div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center text-white">
+                <div class="reveal">
+                    <div class="text-5xl font-bold mb-2 font-amiri counter" style="-webkit-text-fill-color: white;">15+</div>
+                    <p class="text-islamic-gold font-medium">Years of Service</p>
+                </div>
+                <div class="reveal" style="transition-delay: 100ms;">
+                    <div class="text-5xl font-bold mb-2 font-amiri counter" style="-webkit-text-fill-color: white;">5,000+</div>
+                    <p class="text-islamic-gold font-medium">Students Educated</p>
+                </div>
+                <div class="reveal" style="transition-delay: 200ms;">
+                    <div class="text-5xl font-bold mb-2 font-amiri counter" style="-webkit-text-fill-color: white;">1M+</div>
+                    <p class="text-islamic-gold font-medium">Meals Served</p>
+                </div>
+                <div class="reveal" style="transition-delay: 300ms;">
+                    <div class="text-5xl font-bold mb-2 font-amiri counter" style="-webkit-text-fill-color: white;">25+</div>
+                    <p class="text-islamic-gold font-medium">Cities Reached</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Programs Section -->
+    <section id="programs" class="py-24 bg-islamic-cream">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 reveal">
+                <div class="islamic-border inline-block px-8 py-2 mb-4">
+                    <span class="text-islamic-gold font-amiri text-lg tracking-widest">WHAT WE DO</span>
+                </div>
+                <h2 class="text-4xl md:text-5xl font-bold text-islamic-green font-amiri mb-6">Our Programs</h2>
+            </div>
+            
+            <div class="space-y-12">
+                <!-- Education Program -->
+                <div class="bg-white rounded-3xl overflow-hidden shadow-xl reveal card-hover">
+                    <div class="grid md:grid-cols-2">
+                        <div class="relative h-64 md:h-auto">
+                            <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=800&h=600&fit=crop" alt="Islamic Education" class="w-full h-full object-cover">
+                            <div class="absolute inset-0 bg-gradient-to-r from-islamic-green/60 to-transparent md:bg-gradient-to-l"></div>
+                            <div class="absolute top-6 left-6 bg-white/90 backdrop-blur px-4 py-2 rounded-full text-islamic-green font-bold text-sm">
+                                <i class="fas fa-graduation-cap mr-2"></i>Education
+                            </div>
+                        </div>
+                        <div class="p-8 md:p-12 flex flex-col justify-center">
+                            <h3 class="text-3xl font-bold text-islamic-green mb-4 font-amiri">Naseem Academy</h3>
+                            <p class="text-gray-600 mb-6 leading-relaxed">
+                                Comprehensive Islamic education including Quran memorization (Hifz), Tajweed, Fiqh, Hadith studies, and Arabic language. Our curriculum balances traditional Islamic sciences with modern educational methods.
+                            </p>
+                            <ul class="space-y-3 mb-8">
+                                <li class="flex items-center text-gray-700">
+                                    <i class="fas fa-check-circle text-islamic-gold mr-3"></i>
+                                    Free tuition and study materials
+                                </li>
+                                <li class="flex items-center text-gray-700">
+                                    <i class="fas fa-check-circle text-islamic-gold mr-3"></i>
+                                    Qualified male and female instructors
+                                </li>
+                                <li class="flex items-center text-gray-700">
+                                    <i class="fas fa-check-circle text-islamic-gold mr-3"></i>
+                                    Classes for children and adults
+                                </li>
+                                <li class="flex items-center text-gray-700">
+                                    <i class="fas fa-check-circle text-islamic-gold mr-3"></i>
+                                    Online and in-person options
+                                </li>
+                            </ul>
+                            <button class="self-start px-6 py-3 border-2 border-islamic-green text-islamic-green rounded-full font-semibold hover:bg-islamic-green hover:text-white transition-all">
+                                Enroll Now
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Food Program -->
+                <div class="bg-white rounded-3xl overflow-hidden shadow-xl reveal card-hover">
+                    <div class="grid md:grid-cols-2">
+                        <div class="p-8 md:p-12 flex flex-col justify-center order-2 md:order-1">
+                            <h3 class="text-3xl font-bold text-islamic-green mb-4 font-amiri">Rizq Food Bank</h3>
+                            <p class="text-gray-600 mb-6 leading-relaxed">
+                                Dignified food assistance serving hot meals daily and distributing monthly grocery packages to families in need. Special programs during Ramadan and Eid celebrations.
+                            </p>
+                            <ul class="space-y-3 mb-8">
+                                <li class="flex items-center text-gray-700">
+                                    <i class="fas fa-check-circle text-islamic-gold mr-3"></i>
+                                    Daily community kitchen
+                                </li>
+                                <li class="flex items-center text-gray-700">
+                                    <i class="fas fa-check-circle text-islamic-gold mr-3"></i>
+                                    Monthly family food packages
+                                </li>
+                                <li class="flex items-center text-gray-700">
+                                    <i class="fas fa-check-circle text-islamic-gold mr-3"></i>
+                                    Ramadan Iftar programs
+                                </li>
+                                <li class="flex items-center text-gray-700">
+                                    <i class="fas fa-check-circle text-islamic-gold mr-3"></i>
+                                    Emergency relief distribution
+                                </li>
+                            </ul>
+                            <button class="self-start px-6 py-3 border-2 border-islamic-green text-islamic-green rounded-full font-semibold hover:bg-islamic-green hover:text-white transition-all">
+                                Request Assistance
+                            </button>
+                        </div>
+                        <div class="relative h-64 md:h-auto order-1 md:order-2">
+                            <img src="https://images.unsplash.com/photo-1593113598332-cd288d649433?w=800&h=600&fit=crop" alt="Food Distribution" class="w-full h-full object-cover">
+                            <div class="absolute inset-0 bg-gradient-to-l from-islamic-green/60 to-transparent md:bg-gradient-to-r"></div>
+                            <div class="absolute top-6 right-6 bg-white/90 backdrop-blur px-4 py-2 rounded-full text-islamic-green font-bold text-sm">
+                                <i class="fas fa-utensils mr-2"></i>Food Aid
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 reveal">
+                <h2 class="text-4xl font-bold text-islamic-green font-amiri mb-4">Stories of Impact</h2>
+                <p class="text-gray-600">Hear from those whose lives have been touched by your generosity</p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-islamic-cream rounded-2xl p-8 relative reveal">
+                    <i class="fas fa-quote-right absolute top-6 right-6 text-islamic-gold/30 text-4xl"></i>
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-14 h-14 bg-islamic-green rounded-full flex items-center justify-center text-white text-xl font-bold">
+                            A
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-islamic-green">Ahmed Khan</h4>
+                            <p class="text-sm text-gray-500">Student, Age 16</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-700 italic leading-relaxed">
+                        "Thanks to Naseem Sareef Foundation, I completed my Hifz and now teach younger students. They provided everything—books, meals, and love. May Allah bless them."
+                    </p>
+                    <div class="mt-4 flex text-islamic-gold">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                </div>
+                
+                <div class="bg-islamic-cream rounded-2xl p-8 relative reveal" style="transition-delay: 100ms;">
+                    <i class="fas fa-quote-right absolute top-6 right-6 text-islamic-gold/30 text-4xl"></i>
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-14 h-14 bg-islamic-gold rounded-full flex items-center justify-center text-white text-xl font-bold">
+                            F
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-islamic-green">Fatima Begum</h4>
+                            <p class="text-sm text-gray-500">Mother of 4</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-700 italic leading-relaxed">
+                        "When my husband lost his job, the foundation's food bank sustained us. They treated us with such dignity. Now my children study there for free. Truly a blessing."
+                    </p>
+                    <div class="mt-4 flex text-islamic-gold">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                </div>
+                
+                <div class="bg-islamic-cream rounded-2xl p-8 relative reveal" style="transition-delay: 200ms;">
+                    <i class="fas fa-quote-right absolute top-6 right-6 text-islamic-gold/30 text-4xl"></i>
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-14 h-14 bg-islamic-green rounded-full flex items-center justify-center text-white text-xl font-bold">
+                            M
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-islamic-green">Mohammad Ali</h4>
+                            <p class="text-sm text-gray-500">Volunteer</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-700 italic leading-relaxed">
+                        "Volunteering here has transformed my life. Seeing the smiles when we serve meals or when a child recites Quran perfectly—it's priceless. Best charity I've worked with."
+                    </p>
+                    <div class="mt-4 flex text-islamic-gold">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-24 bg-gradient-to-br from-islamic-green to-deep-teal relative overflow-hidden">
+        <div class="absolute inset-0 opacity-20">
+            <div class="absolute top-0 left-0 w-full h-full" style="background-image: url('data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%23d4af37\' fill-opacity=\'0.4\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');"></div>
+        </div>
+        
+        <div class="max-w-4xl mx-auto px-4 text-center relative z-10 reveal">
+            <h2 class="text-4xl md:text-5xl font-bold text-white font-amiri mb-6">
+                Be the Change You Wish to See
+            </h2>
+            <p class="text-xl text-white/90 mb-10 leading-relaxed">
+                Your donation can feed a family for a month or educate a child for a year. Every contribution, big or small, brings light to someone's life.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <button onclick="openDonateModal()" class="bg-islamic-gold text-white px-10 py-4 rounded-full font-bold text-lg shadow-xl hover:bg-yellow-500 transition-all transform hover:scale-105">
+                    <i class="fas fa-donate mr-2"></i>Donate Now
+                </button>
+                <button class="bg-white/10 backdrop-blur border-2 border-white text-white px-10 py-4 rounded-full font-bold text-lg hover:bg-white hover:text-islamic-green transition-all">
+                    <i class="fas fa-hand-holding-heart mr-2"></i>Become a Volunteer
+                </button>
+            </div>
+            <div class="mt-12 grid grid-cols-3 gap-8 text-white/80 text-sm">
+                <div>
+                    <i class="fas fa-shield-alt text-3xl mb-2 text-islamic-gold"></i>
+                    <p>Secure Payment</p>
+                </div>
+                <div>
+                    <i class="fas fa-receipt text-3xl mb-2 text-islamic-gold"></i>
+                    <p>Tax Deductible</p>
+                </div>
+                <div>
+                    <i class="fas fa-chart-line text-3xl mb-2 text-islamic-gold"></i>
+                    <p>100% Transparency</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-24 bg-islamic-cream">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-2 gap-16">
+                <div class="reveal">
+                    <div class="islamic-border inline-block px-8 py-2 mb-4">
+                        <span class="text-islamic-gold font-amiri text-lg tracking-widest">GET IN TOUCH</span>
+                    </div>
+                    <h2 class="text-4xl font-bold text-islamic-green font-amiri mb-6">Contact Us</h2>
+                    <p class="text-gray-600 mb-8 leading-relaxed">
+                        Have questions about our programs or want to partner with us? Reach out to our team. We're here to help and collaborate.
+                    </p>
+                    
+                    <div class="space-y-6">
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-islamic-green rounded-full flex items-center justify-center text-white flex-shrink-0">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-islamic-green mb-1">Address</h4>
+                                <p class="text-gray-600">123 Islamic Center Road, Downtown<br>City, State 12345</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-islamic-green rounded-full flex items-center justify-center text-white flex-shrink-0">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-islamic-green mb-1">Phone</h4>
+                                <p class="text-gray-600">+1 (555) 123-4567<br>+1 (555) 987-6543</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-islamic-green rounded-full flex items-center justify-center text-white flex-shrink-0">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-islamic-green mb-1">Email</h4>
+                                <p class="text-gray-600">info@naseemsareef.org<br>donate@naseemsareef.org</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-8 flex gap-4">
+                        <a href="#" class="w-10 h-10 bg-islamic-green rounded-full flex items-center justify-center text-white hover:bg-islamic-gold transition-colors">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-islamic-green rounded-full flex items-center justify-center text-white hover:bg-islamic-gold transition-colors">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-islamic-green rounded-full flex items-center justify-center text-white hover:bg-islamic-gold transition-colors">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-islamic-green rounded-full flex items-center justify-center text-white hover:bg-islamic-gold transition-colors">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-3xl p-8 shadow-xl reveal">
+                    <form class="space-y-6" onsubmit="event.preventDefault(); showNotification('Message sent successfully!');">
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">First Name</label>
+                                <input type="text" class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-islamic-green focus:ring-2 focus:ring-islamic-green/20 outline-none transition-all" placeholder="John">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Last Name</label>
+                                <input type="text" class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-islamic-green focus:ring-2 focus:ring-islamic-green/20 outline-none transition-all" placeholder="Doe">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Email</label>
+                            <input type="email" class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-islamic-green focus:ring-2 focus:ring-islamic-green/20 outline-none transition-all" placeholder="john@example.com">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Subject</label>
+                            <select class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-islamic-green focus:ring-2 focus:ring-islamic-green/20 outline-none transition-all">
+                                <option>General Inquiry</option>
+                                <option>Education Programs</option>
+                                <option>Food Assistance</option>
+                                <option>Volunteering</option>
+                                <option>Partnership</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Message</label>
+                            <textarea rows="4" class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-islamic-green focus:ring-2 focus:ring-islamic-green/20 outline-none transition-all" placeholder="How can we help you?"></textarea>
+                        </div>
+                        <button type="submit" class="w-full bg-islamic-green text-white py-4 rounded-xl font-bold text-lg hover:bg-deep-teal transition-all transform hover:scale-[1.02]">
+                            Send Message
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-deep-teal text-white pt-16 pb-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-8 mb-12">
+                <div class="space-y-4">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 bg-islamic-gold rounded-full flex items-center justify-center text-deep-teal font-amiri text-xl font-bold">
+                            ن
+                        </div>
+                        <div>
+                            <h3 class="font-bold font-amiri text-lg">NASEEM SAREEF</h3>
+                            <p class="text-xs text-islamic-gold">FOUNDATION</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        Serving humanity through education and nourishment. Registered 501(c)(3) non-profit organization.
+                    </p>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold text-islamic-gold mb-4">Quick Links</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="#home" class="hover:text-white transition-colors">Home</a></li>
+                        <li><a href="#mission" class="hover:text-white transition-colors">About Us</a></li>
+                        <li><a href="#programs" class="hover:text-white transition-colors">Programs</a></li>
+                        <li><a href="#impact" class="hover:text-white transition-colors">Impact Report</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Financial Reports</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold text-islamic-gold mb-4">Programs</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="#" class="hover:text-white transition-colors">Quranic Studies</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Food Bank</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Orphan Care</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Disaster Relief</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Women's Center</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold text-islamic-gold mb-4">Newsletter</h4>
+                    <p class="text-gray-400 text-sm mb-4">Subscribe to receive updates on our work and impact.</p>
+                    <form class="flex gap-2" onsubmit="event.preventDefault(); showNotification('Subscribed successfully!');">
+                        <input type="email" placeholder="Your email" class="flex-1 px-4 py-2 rounded-lg bg-white/10 border border-white/20 text-white placeholder-gray-400 focus:outline-none focus:border-islamic-gold">
+                        <button type="submit" class="px-4 py-2 bg-islamic-gold text-deep-teal rounded-lg font-bold hover:bg-yellow-500 transition-colors">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-gray-400 text-sm">© 2024 Naseem Sareef Foundation. All rights reserved.</p>
+                <div class="flex gap-6 text-sm text-gray-400">
+                    <a href="#" class="hover:text-white transition-colors">Privacy Policy</a>
+                    <a href="#" class="hover:text-white transition-colors">Terms of Service</a>
+                    <a href="#" class="hover:text-white transition-colors">Cookie Policy</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Donation Modal -->
+    <div id="donateModal" class="fixed inset-0 z-50 hidden">
+        <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" onclick="closeDonateModal()"></div>
+        <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full max-w-lg bg-white rounded-3xl shadow-2xl p-8 m-4">
+            <button onclick="closeDonateModal()" class="absolute top-4 right-4 w-10 h-10 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center transition-colors">
+                <i class="fas fa-times text-gray-600"></i>
+            </button>
+            
+            <div class="text-center mb-6">
+                <div class="w-16 h-16 bg-islamic-green rounded-full flex items-center justify-center text-white text-2xl mx-auto mb-4">
+                    <i class="fas fa-heart"></i>
+                </div>
+                <h3 class="text-2xl font-bold text-islamic-green font-amiri">Make a Donation</h3>
+                <p class="text-gray-600 text-sm mt-2">Your generosity changes lives</p>
+            </div>
+            
+            <div class="space-y-4">
+                <div class="grid grid-cols-3 gap-3">
+                    <button class="donation-amount py-3 border-2 border-islamic-green/20 rounded-xl font-bold text-islamic-green hover:bg-islamic-green hover:text-white transition-all" onclick="selectAmount(this, 50)">$50</button>
+                    <button class="donation-amount py-3 border-2 border-islamic-green/20 rounded-xl font-bold text-islamic-green hover:bg-islamic-green hover:text-white transition-all bg-islamic-green text-white" onclick="selectAmount(this, 100)">$100</button>
+                    <button class="donation-amount py-3 border-2 border-islamic-green/20 rounded-xl font-bold text-islamic-green hover:bg-islamic-green hover:text-white transition-all" onclick="selectAmount(this, 250)">$250</button>
+                </div>
+                
+                <div class="relative">
+                    <span class="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-500 font-bold">$</span>
+                    <input type="number" id="customAmount" placeholder="Custom amount" class="w-full pl-8 pr-4 py-3 border-2 border-islamic-green/20 rounded-xl focus:border-islamic-green outline-none transition-all" onchange="clearSelection()">
+                </div>
+                
+                <select class="w-full px-4 py-3 border-2 border-islamic-green/20 rounded-xl focus:border-islamic-green outline-none transition-all bg-white">
+                    <option>General Fund</option>
+                    <option>Education Programs</option>
+                    <option>Food Bank</option>
+                    <option>Orphan Sponsorship</option>
+                    <option>Zakat</option>
+                </select>
+                
+                <button onclick="processDonation()" class="w-full donate-btn py-4 rounded-xl text-white font-bold text-lg shadow-lg hover:shadow-xl transition-all transform hover:scale-[1.02]">
+                    Proceed to Payment
+                </button>
+                
+                <div class="flex items-center justify-center gap-4 text-gray-400 text-2xl pt-2">
+                    <i class="fab fa-cc-visa"></i>
+                    <i class="fab fa-cc-mastercard"></i>
+                    
